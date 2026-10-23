@@ -1,0 +1,181 @@
+:root {
+    --negro: #141210;
+    --gris-oscuro: #1b1a19;
+    --dorado: #d4a95a;
+    --dorado-oscuro: #b88d3f;
+    --gris: #b5ab9d;
+    --transicion: 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--negro);
+    color: var(--gris);
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    line-height: 1.6;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: var(--dorado);
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 4px;
+}
+
+/* ---------- BANNER (header) ---------- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;            /* centra marca y menú en vertical */
+    justify-content: space-between; /* marca a la izquierda, menú a la derecha */
+    gap: 1.5rem;
+    padding: 1rem clamp(1rem, 5vw, 4rem);
+    background-color: var(--gris-oscuro);
+    border-bottom: 3px solid var(--dorado);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- MARCA (logo + nombre) ---------- */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;              /* usa "contain" si tu logo no es redondo/cuadrado */
+    background-color: var(--negro);
+    border: 2px solid var(--dorado);
+    transition: transform var(--transicion), border-color var(--transicion);
+}
+
+.marca h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.3rem, 3.5vw, 2rem);
+    line-height: 1.2;
+    color: var(--dorado);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color var(--transicion);
+}
+
+/* Efecto al pasar el cursor sobre la marca */
+.marca:hover .logo,
+.marca:focus-visible .logo {
+    transform: scale(1.06);
+    border-color: var(--dorado-oscuro);
+}
+
+.marca:hover h1,
+.marca:focus-visible h1 {
+    color: var(--dorado-oscuro);
+}
+
+/* ---------- NAV ---------- */
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+nav a {
+    position: relative;
+    display: block;
+    padding: 0.6rem 1.1rem;
+    color: var(--gris);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color var(--transicion);
+}
+
+/* Línea dorada que crece desde el centro */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0.2rem;
+    width: 0;
+    height: 2px;
+    background-color: var(--dorado);
+    transition: width var(--transicion), left var(--transicion);
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: var(--dorado);
+}
+
+nav a:hover::after,
+nav a:focus-visible::after {
+    left: 15%;
+    width: 70%;
+}
+
+/* Página actual (usa tu aria-current="page") */
+nav a[aria-current="page"] {
+    color: var(--dorado);
+}
+
+nav a[aria-current="page"]::after {
+    left: 15%;
+    width: 70%;
+    background-color: var(--dorado-oscuro);
+}
+
+/* ---------- Responsive ---------- */
+
+/* Tablet y móvil: marca arriba, menú abajo, todo centrado */
+@media (max-width: 800px) {
+    header {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    .marca {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Móvil pequeño: logo y enlaces más compactos */
+@media (max-width: 480px) {
+    .logo {
+        width: 56px;
+        height: 56px;
+    }
+
+    nav a {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+}
