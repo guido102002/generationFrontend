@@ -1,101 +1,490 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre nosotros - Trips Barber Club</title>
+    <title>Acerca de Nosotros - Trips Barber Club</title>
+    <!-- Google Fonts: Montserrat (Bold 700) & Open Sans (300, 400, 600) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- FontAwesome para WhatsApp -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos personalizados -->
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <header>
-        <a class="marca" href="index.html" aria-label="Trips Barber Club - Ir al inicio">
-            <img class="logo" src="img/logo.png" alt="Logo de Trips Barber Club">
-            <h1>Trips Barber Club</h1>
-        </a>
-        <nav aria-label="Menú principal">
-            <ul>
-                <li><a href="index.html" aria-current="page">Inicio</a></li>
-                <li><a href="quienes-somos.html">Quiénes somos</a></li>
-                <li><a href="reserva.html">Reserva</a></li>
-                <li><a href="contacto.html">Contáctanos</a></li>
-            </ul>
-        </nav>
+
+    <!-- 1. NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#" aria-label="Trips Barber Club">
+                <img src="img/logo.jpg" alt="Logo de Trips Barber Club" class="brand-logo"
+                    onerror="this.onerror=null; this.src='img/barber.png';">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarStaticNav"
+                aria-controls="navbarStaticNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarStaticNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Acerca de</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto-section">Contáctenos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Franja elegante -->
+    <div class="barber-accent-line" aria-hidden="true"></div>
+
+    <!-- 2. CABECERA  -->
+    <header class="hero-carousel-section position-relative">
+        <div id="heroBarberCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+            data-bs-interval="4500">
+            <!-- Indicadores -->
+            <div class="carousel-indicators custom-indicators">
+                <button type="button" data-bs-target="#heroBarberCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroBarberCarousel" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroBarberCarousel" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+
+            <!-- Diapositivas -->
+            <div class="carousel-inner">
+                <!-- Slide 1-->
+                <div class="carousel-item active slide-1">
+                    <div class="carousel-overlay d-flex align-items-center justify-content-center text-center">
+                        <div class="container py-5">
+                            <span class="badge-tag mb-3">HISTORIA </span>
+                            <h1 class="hero-title display-4 fw-bold">Sobre Trips Barber Club</h1>
+                            <p class="hero-subtitle lead mx-auto">Nuestra Historia, Nuestra Pasión</p>
+                            <div class="gold-divider mx-auto my-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2-->
+                <div class="carousel-item slide-2">
+                    <div class="carousel-overlay d-flex align-items-center justify-content-center text-center">
+                        <div class="container py-5">
+                            <span class="badge-tag mb-3">EQUIPO </span>
+                            <h2 class="hero-title display-4 fw-bold">Maestros del Oficio</h2>
+                            <p class="hero-subtitle lead mx-auto">Profesionales apasionados dedicados al corte clásico y
+                                estilos modernos</p>
+                            <div class="gold-divider mx-auto my-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item slide-3">
+                    <div class="carousel-overlay d-flex align-items-center justify-content-center text-center">
+                        <div class="container py-5">
+                            <span class="badge-tag mb-3">EXPERIENCIA </span>
+                            <h2 class="hero-title display-4 fw-bold">Tradición, Calidad y Puntualidad</h2>
+                            <p class="hero-subtitle lead mx-auto">Más que un corte de cabello, un ritual exclusivo
+                                pensado para tu distinción</p>
+                            <div class="gold-divider mx-auto my-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controles Anterior / Siguiente -->
+            <button class="carousel-control-prev custom-carousel-btn" type="button" data-bs-target="#heroBarberCarousel"
+                data-bs-slide="prev" aria-label="Anterior">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next custom-carousel-btn" type="button" data-bs-target="#heroBarberCarousel"
+                data-bs-slide="next" aria-label="Siguiente">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
     </header>
 
-    <div class="pole" aria-hidden="true"></div>
+    <main>
+        <!-- 3. SECCIÓN DE LA BARBERÍA -->
+        <section class="section-mv py-5">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="custom-card mv-card h-100 p-4 p-md-5">
+                            <div class="card-icon-wrapper mb-3">
+                                <i class="bi bi-compass"></i>
+                            </div>
+                            <h2 class="section-card-title mb-3">Nuestra Misión</h2>
+                            <p class="card-text-body">
+                                Brindar una experiencia superior en el cuidado masculino y la barbería integral,
+                                rescatando el arte del afeitado clásico combinado con las últimas tendencias de
+                                estilismo. Nos enfocamos en exaltar la autenticidad, elegancia y seguridad de cada
+                                caballero en un entorno exclusivo, sofisticado y de máxima relajación.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="custom-card mv-card h-100 p-4 p-md-5">
+                            <div class="card-icon-wrapper mb-3">
+                                <i class="bi bi-eye"></i>
+                            </div>
+                            <h2 class="section-card-title mb-3">Nuestra Visión</h2>
+                            <p class="card-text-body">
+                                Consolidarnos como la barbería premium más influyente y distinguida, reconocida por el
+                                rigor técnico de nuestros maestros, la calidez en el trato y la innovación constante en
+                                tratamientos capilares y faciales masculinos, marcando un estándar de distinción
+                                indiscutible.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <main class="page">
-        <header class="intro">
-            <h1>Sobre nosotros</h1>
-            <p>Conoce al equipo de desarrolladores detrás de Barber Trips Club.</p>
-        </header>
+        <!-- 4. SECCIÓN DE BARBEROS -->
+        <section class="section-barbers py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-heading display-6 fw-bold">Equipo de Barberos</h2>
+                    <p class="section-subtext mx-auto">Profesionales dedicados que transforman cada corte y perfilado en
+                        una experiencia de distinción.</p>
+                    <div class="gold-divider mx-auto my-3"></div>
+                </div>
 
-        <section class="team" aria-label="Equipo de desarrolladores">
+                <div class="row g-4 justify-content-center">
+                    <!-- Barbero 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="custom-card barber-card h-100 text-center p-4">
+                            <div class="barber-img-container mx-auto mb-4">
+                                <img src="img/barber.png" alt="Barbero" class="img-fluid barber-avatar">
+                            </div>
+                            <h3 class="barber-name mb-1">Nombre del barbero </h3>
+                            <span class="barber-specialty d-block mb-3">Especialidad del barbero</span>
+                            <p class="card-text-body mb-0">
+                                Descripcion del barbero
+                            </p>
+                        </div>
+                    </div>
 
-            <article class="member">
-                <div class="photo">
-                    <img src="img/fotopro.png" alt="Foto de Angie Fuentes" width="300" height="300">
-                </div>
-                <h2>Angie Fuentes</h2>
-                <p class="role">Full Stack Developer</p>
-                <div class="links">
-                    <a href="https://github.com/AngieFuentes2909" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://www.linkedin.com/in/angie-saray-fuentes-carre%C3%B1o-desalloradora-software/" target="_blank" rel="noopener">LinkedIn</a>
-                </div>
-            </article>
+                    <!-- Barbero 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="custom-card barber-card h-100 text-center p-4">
+                            <div class="barber-img-container mx-auto mb-4">
+                                <img src="img/barber.png" alt="Barbero" class="img-fluid barber-avatar">
+                            </div>
+                            <h3 class="barber-name mb-1">Nombre del barbero </h3>
+                            <span class="barber-specialty d-block mb-3">Especialidad del barbero</span>
+                            <p class="card-text-body mb-0">
+                                Descripcion del barbero
+                            </p>
+                        </div>
+                    </div>
 
-            <article class="member">
-                <div class="photo">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQFPhX-Vc0Q3vw/profile-displayphoto-crop_800_800/B4EZwKZ0yLKoAI-/0/1769701069085?e=1794441600&v=beta&t=ML6kF3a1-MdegyE1FGkspdxR8kGwSqLzp2OPurifA_U" alt="Foto de Miguel Quintero" width="300" height="300">
+                    <!-- Barbero 3 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="custom-card barber-card h-100 text-center p-4">
+                            <div class="barber-img-container mx-auto mb-4">
+                                <img src="img/barber.png" alt="Barbero" class="img-fluid barber-avatar">
+                            </div>
+                            <h3 class="barber-name mb-1">Nombre del barbero </h3>
+                            <span class="barber-specialty d-block mb-3">Especialidad del barbero</span>
+                            <p class="card-text-body mb-0">
+                                Descripcion del barbero
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <h2>Miguel Quintero</h2>
-                <p class="role">Full Stack Developer</p>
-                <div class="links">
-                    <a href="https://github.com/MiguelQuintero21" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://www.linkedin.com/in/miguel-quintero-developer/" target="_blank" rel="noopener">LinkedIn</a>
-                </div>
-            </article>
+            </div>
+        </section>
 
-            <article class="member">
-                <div class="photo">
-                    <img src="img/Fotografia_3MB_Maximo.jpg" alt="Foto de Guido Fernando" width="300" height="300">
+        <!-- 5. SECCIÓN DE NUESTROS VALORES -->
+        <section class="section-values py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-heading display-6 fw-bold">Nuestros Valores</h2>
+                    <p class="section-subtext mx-auto">Principios esenciales que forjan la excelencia y el respeto en
+                        cada servicio de Trips Barber Club.</p>
+                    <div class="gold-divider mx-auto my-3"></div>
                 </div>
-                <h2>Guido Fernando</h2>
-                <p class="role">Full Stack Developer</p>
-                <div class="links">
-                    <a href="https://github.com/guido102002" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://www.linkedin.com/in/guido-fernando-majin-ibarra-04845b2a6/" target="_blank" rel="noopener">LinkedIn</a>
-                </div>
-            </article>
 
-            <article class="member">
-                <div class="photo">
-                    <img src="images/dev4.jpg" alt="Foto de Camilo Bohorquez" width="300" height="300">
-                </div>
-                <h2>Camilo Bohorquez</h2>
-                <p class="role">Full Stack Developer</p>
-                <div class="links">
-                    <a href="#" target="_blank" rel="noopener">GitHub</a>
-                    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-                </div>
-            </article>
+                <div class="row g-4">
+                    <!-- Valor 1: Tradición -->
+                    <div class="col-md-4">
+                        <div class="custom-card value-card h-100 text-center p-4 p-lg-5">
+                            <div class="value-icon-box mx-auto mb-4">
+                                <img src="img/tradicion.png" alt="Tradición" class="img-fluid value-img">
+                            </div>
+                            <h3 class="value-title mb-3">Tradición</h3>
+                        </div>
+                    </div>
 
-            <article class="member">
-                <div class="photo">
-                    <img src="img/Retrato profesional en oficina acogedora.png" alt="Foto de Juliana Escarraga" width="300" height="300">
-                </div>
-                <h2>Juliana Escarraga</h2>
-                <p class="role">Full Stack Developer</p>
-                <div class="links">
-                    <a href="https://github.com/julianaescarraga3-ops" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://www.linkedin.com/in/juliana-escarraga-desarrollo-full-stack-java/" target="_blank" rel="noopener">LinkedIn</a>
-                </div>
-            </article>
+                    <!-- Valor 2: Calidad -->
+                    <div class="col-md-4">
+                        <div class="custom-card value-card h-100 text-center p-4 p-lg-5">
+                            <div class="value-icon-box mx-auto mb-4">
+                                <img src="img/calidad.png" alt="Calidad" class="img-fluid value-img">
+                            </div>
+                            <h3 class="value-title mb-3">Calidad</h3>
+                        </div>
+                    </div>
 
+                    <!-- Valor 3: Puntualidad -->
+                    <div class="col-md-4">
+                        <div class="custom-card value-card h-100 text-center p-4 p-lg-5">
+                            <div class="value-icon-box mx-auto mb-4">
+                                <img src="img/puntualidad.png" alt="Puntualidad" class="img-fluid value-img">
+                            </div>
+                            <h3 class="value-title mb-3">Puntualidad</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. SECCIÓN "EQUIPO DE DESARROLLADORES" -->
+        <section class="section-developers py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-heading display-6 fw-bold">Equipo de Desarrolladores</h2>
+                    <p class="section-subtext mx-auto">Conoce al equipo de desarrolladores detrás de Barber Trips Club.</p>
+                    <div class="gold-divider mx-auto my-3"></div>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    <!-- Angie Fuentes -->
+                    <div class="col-sm-6 col-md-4 col-lg">
+                        <article class="custom-card dev-card h-100 text-center p-3">
+                            <div class="dev-photo-wrapper mx-auto mb-3">
+                                <img src="img/fotopro.png" alt="Foto de Angie Fuentes" class="dev-img">
+                            </div>
+                            <h3 class="dev-name mb-1">Angie Fuentes</h3>
+                            <p class="dev-role mb-3">Full Stack Developer</p>
+                            <div class="dev-links d-flex justify-content-center gap-2">
+                                <a href="https://github.com/AngieFuentes2909" target="_blank" rel="noopener"
+                                    class="dev-link-btn" title="GitHub">
+                                    <i class="bi bi-github"></i> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/angie-saray-fuentes-carre%C3%B1o-desalloradora-software/"
+                                    target="_blank" rel="noopener" class="dev-link-btn" title="LinkedIn">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Miguel Quintero -->
+                    <div class="col-sm-6 col-md-4 col-lg">
+                        <article class="custom-card dev-card h-100 text-center p-3">
+                            <div class="dev-photo-wrapper mx-auto mb-3">
+                                <img src="https://media.licdn.com/dms/image/v2/D4E03AQFPhX-Vc0Q3vw/profile-displayphoto-crop_800_800/B4EZwKZ0yLKoAI-/0/1769701069085?e=1794441600&v=beta&t=ML6kF3a1-MdegyE1FGkspdxR8kGwSqLzp2OPurifA_U"
+                                    alt="Foto de Miguel Quintero" class="dev-img">
+                            </div>
+                            <h3 class="dev-name mb-1">Miguel Quintero</h3>
+                            <p class="dev-role mb-3">Full Stack Developer</p>
+                            <div class="dev-links d-flex justify-content-center gap-2">
+                                <a href="https://github.com/MiguelQuintero21" target="_blank" rel="noopener"
+                                    class="dev-link-btn" title="GitHub">
+                                    <i class="bi bi-github"></i> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/miguel-quintero-developer/" target="_blank"
+                                    rel="noopener" class="dev-link-btn" title="LinkedIn">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Guido Fernando -->
+                    <div class="col-sm-6 col-md-4 col-lg">
+                        <article class="custom-card dev-card h-100 text-center p-3">
+                            <div class="dev-photo-wrapper mx-auto mb-3">
+                                <img src="img/Fotografia_3MB_Maximo.jpg" alt="Foto de Guido Fernando" class="dev-img">
+                            </div>
+                            <h3 class="dev-name mb-1">Guido Fernando</h3>
+                            <p class="dev-role mb-3">Full Stack Developer</p>
+                            <div class="dev-links d-flex justify-content-center gap-2">
+                                <a href="https://github.com/guido102002" target="_blank" rel="noopener"
+                                    class="dev-link-btn" title="GitHub">
+                                    <i class="bi bi-github"></i> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/guido-fernando-majin-ibarra-04845b2a6/"
+                                    target="_blank" rel="noopener" class="dev-link-btn" title="LinkedIn">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Camilo Bohorquez -->
+                    <div class="col-sm-6 col-md-4 col-lg">
+                        <article class="custom-card dev-card h-100 text-center p-3">
+                            <div class="dev-photo-wrapper mx-auto mb-3">
+                                <img src="img/barber.png" onerror="this.onerror=null; this.src='img/barber.png';"
+                                    alt="Foto de Camilo Bohorquez" class="dev-img">
+                            </div>
+                            <h3 class="dev-name mb-1">Camilo Bohorquez</h3>
+                            <p class="dev-role mb-3">Full Stack Developer</p>
+                            <div class="dev-links d-flex justify-content-center gap-2">
+                                <a href="#" target="_blank" rel="noopener" class="dev-link-btn" title="GitHub">
+                                    <i class="bi bi-github"></i> GitHub
+                                </a>
+                                <a href="#" target="_blank" rel="noopener" class="dev-link-btn" title="LinkedIn">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Juliana Escarraga -->
+                    <div class="col-sm-6 col-md-4 col-lg">
+                        <article class="custom-card dev-card h-100 text-center p-3">
+                            <div class="dev-photo-wrapper mx-auto mb-3">
+                                <img src="img/Retrato profesional en oficina acogedora.png"
+                                    alt="Foto de Juliana Escarraga" class="dev-img">
+                            </div>
+                            <h3 class="dev-name mb-1">Juliana Escarraga</h3>
+                            <p class="dev-role mb-3">Full Stack Developer</p>
+                            <div class="dev-links d-flex justify-content-center gap-2">
+                                <a href="https://github.com/julianaescarraga3-ops" target="_blank" rel="noopener"
+                                    class="dev-link-btn" title="GitHub">
+                                    <i class="bi bi-github"></i> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/juliana-escarraga-desarrollo-full-stack-java/"
+                                    target="_blank" rel="noopener" class="dev-link-btn" title="LinkedIn">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. SECCIÓN CONTÁCTANOS (INTEGRADA) -->
+        <section id="contacto-section" class="page py-5">
+            <div class="container">
+                <header class="intro text-center mb-5">
+                    <h1>Contáctanos</h1>
+                    <p>Escríbenos y te respondemos lo más pronto posible.</p>
+                </header>
+
+                <div class="contact-grid row g-4">
+                    <!-- Formulario -->
+                    <div class="col-lg-6">
+                        <section class="form-card p-4 h-100" aria-labelledby="form-title">
+                            <h2 id="form-title" class="mb-4">Envíanos un mensaje</h2>
+
+                            <form id="contact-form" novalidate>
+                                <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
+
+                                <div class="field mb-3">
+                                    <label for="nombre" class="form-label">Nombre completo</label>
+                                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej. Juan Pérez" autocomplete="name" required>
+                                    <small class="error text-danger" data-for="nombre"></small>
+                                </div>
+
+                                <div class="field mb-3">
+                                    <label for="email" class="form-label">Correo electrónico</label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="juan@ejemplo.com" autocomplete="email" required>
+                                    <small class="error text-danger" data-for="email"></small>
+                                </div>
+
+                                <div class="field mb-3">
+                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="+57 300 000 0000" autocomplete="tel" inputmode="tel" required>
+                                    <small class="error text-danger" data-for="telefono"></small>
+                                </div>
+
+                                <div class="field mb-3">
+                                    <label for="mensaje" class="form-label">Mensaje</label>
+                                    <textarea id="mensaje" name="mensaje" class="form-control" rows="5" maxlength="600" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                                    <small class="error text-danger" data-for="mensaje"></small>
+                                </div>
+
+                                <button type="submit" class="btn w-100 py-2" id="submit-btn" style="background: linear-gradient(135deg, #f39c12, #d68910); color: #121212; font-weight: bold;">Enviar mensaje</button>
+                                <p class="form-note mt-2 text-center" id="form-status" role="status" aria-live="polite"></p>
+                            </form>
+                        </section>
+                    </div>
+
+                    <!-- Mapa + datos -->
+                    <div class="col-lg-6">
+                        <div class="side h-100 d-flex flex-column gap-4">
+                            <h2 class="side-title h4">Ubicación y datos de contacto</h2>
+
+                            <section class="map-card" aria-label="Mapa de ubicación">
+                                <div class="ratio ratio-16x9">
+                                    <iframe title="Mapa de ubicación de Barber Trips Club" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.3238824308673!2d-74.03724612497322!3d4.713689295261363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f852219281b85%3A0xccd25ee6692cba6!2sBarberia%20Lords%20%C2%AE%20Country%20Club!5e0!3m2!1ses-419!2sco!4v1793048670077!5m2!1ses-419!2sco" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                </div>
+                            </section>
+
+                            <section class="info-card p-3" aria-label="Datos de contacto">
+                                <span id="open-badge" class="badge" hidden></span>
+
+                                <ul class="contact-list list-unstyled mb-3">
+                                    <li class="mb-2"><strong>Dirección:</strong> <span>Calle 134 #9a-92 Local 1 Bogotá, Cundinamarca</span></li>
+                                    <li class="mb-2"><strong>Teléfono:</strong> <a href="tel:+573015047928">+57 3015047928</a></li>
+                                    <li class="mb-2"><strong>Correo:</strong> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tripsbarber@gmail.com&su=Consulta%20desde%20la%20web&body=Hola,%20quisiera%20más%20información%20sobre%20sus%20servicios." target="_blank">tripsbarber@gmail.com</a></li>
+                                </ul>
+
+                                <ul class="hours list-unstyled mb-0" id="hours">
+                                    <li data-day="1" data-open="09:00" data-close="20:00" class="d-flex justify-content-between"><span>Lunes</span><span>9:00 am - 8:00 pm</span></li>
+                                    <li data-day="2" data-open="09:00" data-close="20:00" class="d-flex justify-content-between"><span>Martes</span><span>9:00 am - 8:00 pm</span></li>
+                                    <li data-day="3" data-open="09:00" data-close="20:00" class="d-flex justify-content-between"><span>Miércoles</span><span>9:00 am - 8:00 pm</span></li>
+                                    <li data-day="4" data-open="09:00" data-close="20:00" class="d-flex justify-content-between"><span>Jueves</span><span>9:00 am - 8:00 pm</span></li>
+                                    <li data-day="5" data-open="09:00" data-close="20:00" class="d-flex justify-content-between"><span>Viernes</span><span>9:00 am - 8:00 pm</span></li>
+                                    <li data-day="6" data-open="09:00" data-close="20:00" class="d-flex justify-content-between"><span>Sábado</span><span>9:00 am - 8:00 pm</span></li>
+                                    <li data-day="0" data-open="10:00" data-close="16:00" class="d-flex justify-content-between"><span>Domingo</span><span>10:00 am - 4:00 pm</span></li>
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
+
+    <!-- 8. FOOTER-->
+    <footer class="custom-footer py-4">
+        <div class="container text-center">
+            <div class="footer-brand mb-2">
+                <span class="footer-title">Trips Barber Club</span>
+            </div>
+            <p class="footer-copy mb-0">&copy; 2026 Trips Barber Club Angie-Guido-Juliana-Juan-Miguel.</p>
+        </div>
+    </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/573015047928?text=Hola,%20quiero%20más%20información%20sobre%20los%20servicios%20de%20Barber%20Trips%20Club" 
+       class="whatsapp-flotante" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Chat de WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="contacto.js"></script>
 </body>
+
 </html>

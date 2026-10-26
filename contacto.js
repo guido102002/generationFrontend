@@ -1,8 +1,6 @@
-// Los mensajes del formulario llegan a este correo
 const DESTINO = "tripsbarber@gmail.com";
 const ENDPOINT = `https://formsubmit.co/ajax/${DESTINO}`;
 
-/* ---------- 1. Horarios: resaltar hoy y mostrar si está abierto ---------- */
 function toMinutes(hhmm) {
   const [h, m] = hhmm.split(":").map(Number);
   return h * 60 + m;
@@ -28,7 +26,6 @@ function updateOpenStatus() {
   });
 }
 
-/* ---------- 2. Validación ---------- */
 const form = document.getElementById("contact-form");
 const statusEl = document.getElementById("form-status");
 const submitBtn = document.getElementById("submit-btn");
@@ -61,7 +58,7 @@ function setStatus(text, type) {
   statusEl.className = type ? `form-note ${type}` : "form-note";
 }
 
-/* ---------- 3. Envío al correo ---------- */
+/* ----------  Envío al correo ---------- */
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -71,7 +68,6 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  // Si el campo trampa tiene algo, es un bot: fingimos éxito y no enviamos
   if (form.elements._honey.value) {
     form.reset();
     return;
@@ -86,7 +82,7 @@ form.addEventListener("submit", async (e) => {
     "Correo": form.elements.email.value.trim(),
     "Teléfono": form.elements.telefono.value.trim(),
     "Mensaje": form.elements.mensaje.value.trim(),
-    email: form.elements.email.value.trim(), // para poder responderle directo
+    email: form.elements.email.value.trim(), 
     _subject: `Nuevo mensaje de ${form.elements.nombre.value.trim()} - Barber Trips Club`,
     _template: "table",
     _captcha: "false",
