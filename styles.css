@@ -995,3 +995,48 @@ textarea:focus {
         height: 150px;
     }
 }
+
+/* Navbar de la página de inicio */
+.inicio-navbar .nav-link {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--grey-light) !important;
+}
+
+.inicio-navbar .nav-link:hover,
+.inicio-navbar .nav-link.active {
+    color: var(--gold) !important;
+}
+
+.inicio-navbar .navbar-cta {
+    font-size: 0.82rem;
+    padding: 0.55rem 1.4rem;
+    letter-spacing: 0.8px;
+}
+
+.inicio-navbar .navbar-toggler {
+    border-color: rgba(212, 169, 90, 0.4);
+}
+
+.inicio-navbar .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem var(--gold-glow);
+}
+
+/* Resaltado del widget al elegir un servicio */
+.inicio-search-widget.is-highlighted {
+    animation: inicio-widget-pulse 1.2s ease-in-out 2;
+}
+
+@keyframes inicio-widget-pulse {
+    0%,
+    100% {
+        box-shadow: 0 20px 50px #d4a95a;
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px var(--gold-glow), 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+}

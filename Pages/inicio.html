@@ -21,10 +21,18 @@
 </head>
 <body>
     <!-- 1. NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar inicio-navbar sticky-top">
         <div class="container">
-            <div class="collapse navbar-collapse justify-content-end" id="navbarStaticNav">
-                <ul class="navbar-nav align-items-lg-center gap-lg-3">
+            <!-- Botón para desplegar el menú en móvil -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarStaticNav" aria-controls="navbarStaticNav"
+                aria-expanded="false" aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Enlaces a la derecha -->
+            <div class="collapse navbar-collapse" id="navbarStaticNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
                     <li class="nav-item">
                         <a class="nav-link" href="./inicio.html">Inicio</a>
                     </li>
@@ -41,7 +49,7 @@
 
     <main>
         <!-- 1. HERO + WIDGET DE BÚSQUEDA -->
-        <section class="inicio-hero">
+        <section class="inicio-hero" id="widget">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9">
@@ -53,8 +61,7 @@
                             Más que un corte de cabello, un ritual exclusivo pensado para tu distinción.
                             Reserva tu cita en segundos y vive la experiencia de la barbería premium.
                         </p>
-                        <div class="d-flex flex-wrap gap-3">
-                            <a href="./contactanos.html" class="btn btn-gold">Reservar cita</a>                        </div>
+                            
                     </div>
                 </div>
 
@@ -158,7 +165,7 @@
                             <div class="service-body">
                                 <h3 class="service-name">Corte clásico</h3>
                                 <p class="service-meta"><i class="bi bi-clock"></i> 45 min &middot; Sede Country Club</p>
-                                <a href="./contactanos.html" class="btn btn-gold btn-sm">Reservar</a>
+                                <a href="#widget" class="btn btn-gold btn-sm" data-servicio="Corte clásico" data-sede="Sede Country Club">Reservar</a>
                             </div>
                         </article>
                     </div>
@@ -171,7 +178,7 @@
                             <div class="service-body">
                                 <h3 class="service-name">Afeitado premium</h3>
                                 <p class="service-meta"><i class="bi bi-clock"></i> 30 min &middot; Sede Chapinero</p>
-                                <a href="./contactanos.html" class="btn btn-gold btn-sm">Reservar</a>
+                                <a href="#widget" class="btn btn-gold btn-sm" data-servicio="Afeitado premium" data-sede="Sede Chapinero">Reservar</a>
                             </div>
                         </article>
                     </div>
@@ -184,7 +191,7 @@
                             <div class="service-body">
                                 <h3 class="service-name">Corte + barba</h3>
                                 <p class="service-meta"><i class="bi bi-clock"></i> 60 min &middot; Sede Usaquén</p>
-                                <a href="./contactanos.html" class="btn btn-gold btn-sm">Reservar</a>
+                                <a href="#widget" class="btn btn-gold btn-sm" data-servicio="Corte + barba" data-sede="Sede Usaquén">Reservar</a>
                             </div>
                         </article>
                     </div>
@@ -197,7 +204,7 @@
                             <div class="service-body">
                                 <h3 class="service-name">Tratamiento facial</h3>
                                 <p class="service-meta"><i class="bi bi-clock"></i> 40 min &middot; Sede Country Club</p>
-                                <a href="./contactanos.html" class="btn btn-gold btn-sm">Reservar</a>
+                                <a href="#widget" class="btn btn-gold btn-sm" data-servicio="Tratamiento facial" data-sede="Sede Country Club">Reservar</a>
                             </div>
                         </article>
                     </div>
@@ -355,6 +362,7 @@
     <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="contacto.js"></script>
+    <script src="./inicio.js"></script>
 
 </body>
 </html>
