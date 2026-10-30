@@ -21,10 +21,18 @@
 </head>
 <body>
     <!-- 1. NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar inicio-navbar sticky-top">
         <div class="container">
-            <div class="collapse navbar-collapse justify-content-end" id="navbarStaticNav">
-                <ul class="navbar-nav align-items-lg-center gap-lg-3">
+            <!-- Botón para desplegar el menú en móvil -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarStaticNav" aria-controls="navbarStaticNav"
+                aria-expanded="false" aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Enlaces a la derecha -->
+            <div class="collapse navbar-collapse" id="navbarStaticNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
                     <li class="nav-item">
                         <a class="nav-link" href="./inicio.html">Inicio</a>
                     </li>
@@ -252,13 +260,13 @@
                     <div class="col-sm-6 col-md-4 col-lg">
                         <article class="custom-card dev-card h-100 text-center p-3">
                             <div class="dev-photo-wrapper mx-auto mb-3">
-                                <img src="img/barber.png" onerror="this.onerror=null; this.src='img/barber.png';"
+                                <img src="../img/juanBohorquez.jpeg"
                                     alt="Foto de Camilo Bohorquez" class="dev-img">
                             </div>
                             <h3 class="dev-name mb-1">Camilo Bohorquez</h3>
                             <p class="dev-role mb-3">Full Stack Developer</p>
                             <div class="dev-links d-flex justify-content-center gap-2">
-                                <a href="#" target="_blank" rel="noopener" class="dev-link-btn" title="GitHub">
+                                <a href="https://github.com/JuanCamiloB777" target="_blank" rel="noopener" class="dev-link-btn" title="GitHub">
                                     <i class="bi bi-github"></i> GitHub
                                 </a>
                                 <a href="#" target="_blank" rel="noopener" class="dev-link-btn" title="LinkedIn">
