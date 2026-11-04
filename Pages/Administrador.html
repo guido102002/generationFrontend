@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Administrador - Trips Barber Club</title>
+    <!-- Google Fonts: Montserrat & Open Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Estilos personalizados (el orden importa: primero styles.css, luego admin.css) -->
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/admin.css">
+</head>
+<body>
+
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar inicio-navbar sticky-top">
+        <div class="container-fluid px-3 px-lg-4">
+            <a class="navbar-brand footer-title" href="../index.html">Trips Barber Club</a>
+            <div class="ms-auto d-flex align-items-center gap-3">
+                <span class="d-none d-sm-inline" style="font-size:0.85rem;">
+                    <i class="bi bi-person-circle me-1"></i>Administrador
+                </span>
+                <a href="../index.html" class="btn btn-outline-gold btn-sm navbar-cta">
+                    <i class="bi bi-box-arrow-up-right me-1"></i>Ver sitio
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ///////////////////////7 PANEL -->
+    <div class="admin-shell">
+
+        <!-- Menú lateral -->
+        <aside class="admin-sidebar" aria-label="Menú del administrador">
+            <p class="sidebar-label">Panel</p>
+            <ul class="admin-menu">
+                <li><a href="../index.html"><i class="bi bi-house-door"></i> Inicio</a></li>
+                <li><a href="./administrador.html" class="active" aria-current="page"><i class="bi bi-scissors"></i> Servicios</a></li>
+                <li>
+                    <span class="menu-disabled" title="Próximamente">
+                        <i class="bi bi-calendar3"></i> Calendario</a></li>
+                    </span>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="admin-main">
+            <header class="admin-topbar">
+                <div>
+                    <h1>Gestión de servicios</h1>
+                    <p>Crea, edita y elimina los servicios que ofrece la barbería.</p>
+                </div>
+                <button type="button" class="btn btn-outline-gold btn-sm" id="btn-restaurar" title="Volver a los servicios de ejemplo">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i>Restaurar ejemplos
+                </button>
+            </header>
+
+            <div class="row g-4">
+
+                <!--  FORMULARIO (Crear / Editar) -->
+                <div class="col-xl-4 col-lg-5">
+                    <section class="admin-card h-100" aria-labelledby="form-title">
+                        <h2 id="form-title">Crear nuevo servicio</h2>
+
+                        <form id="servicio-form" novalidate>
+                            <input type="hidden" id="srv-id">
+
+                            <div class="mb-2">
+                                <label for="srv-nombre" class="form-label">Nombre del servicio</label>
+                                <input type="text" id="srv-nombre" class="form-control" maxlength="60" placeholder="Ej. Corte clásico">
+                                <small class="field-error" data-for="nombre"></small>
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="srv-tipo" class="form-label">Tipo</label>
+                                <select id="srv-tipo" class="form-select">
+                                    <option value="">Selecciona un tipo</option>
+                                    <option>Corte</option>
+                                    <option>Barba</option>
+                                    <option>Combo</option>
+                                    <option>Tratamiento</option>
+                                </select>
+                                <small class="field-error" data-for="tipo"></small>
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="srv-sede" class="form-label">Sede</label>
+                                <select id="srv-sede" class="form-select">
+                                    <option value="">Selecciona una sede</option>
+                                    <option>Sede Country Club</option>
+                                    <option>Sede Chapinero</option>
+                                    <option>Sede Usaquén</option>
+                                </select>
+                                <small class="field-error" data-for="sede"></small>
+                            </div>
+
+                            <div class="row g-2">
+                                <div class="col-6 mb-2">
+                                    <label for="srv-duracion" class="form-label">Duración (min)</label>
+                                    <input type="number" id="srv-duracion" class="form-control" min="5" max="480" step="5" placeholder="45">
+                                    <small class="field-error" data-for="duracion"></small>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <label for="srv-precio" class="form-label">Precio (COP)</label>
+                                    <input type="number" id="srv-precio" class="form-control" min="1000" step="500" placeholder="35000">
+                                    <small class="field-error" data-for="precio"></small>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label d-block">Imagen</label>
+                                <label for="srv-imagen" class="image-drop" id="image-drop" title="Haz clic para subir una imagen">
+                                    <i class="bi bi-image" id="image-placeholder"></i>
+                                    <img id="image-preview" alt="Vista previa del servicio" hidden>
+                                </label>
+                                <input type="file" id="srv-imagen" accept="image/png,image/jpeg,image/webp" hidden>
+                                <small class="field-error" data-for="imagen"></small>
+                                <button type="button" class="btn btn-link btn-sm p-0 mt-1" id="btn-quitar-imagen" hidden
+                                    style="color:var(--grey);font-size:0.8rem;">Quitar imagen</button>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-gold" id="btn-guardar">
+                                    <i class="bi bi-save me-1"></i>Guardar servicio
+                                </button>
+                                <button type="button" class="btn btn-outline-gold" id="btn-cancelar" hidden>
+                                    Cancelar edición
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+                <!-- ========== LISTA DE SERVICIOS ========== -->
+                <div class="col-xl-8 col-lg-7">
+                    <section class="admin-card h-100" aria-labelledby="lista-title">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+                            <h2 id="lista-title" class="mb-0">
+                                Lista de servicios
+                                <small style="font-size:0.75rem;color:var(--grey);font-weight:400;">(<span id="total-servicios">0</span>)</small>
+                            </h2>
+                            <div class="search-box">
+                                <i class="bi bi-search"></i>
+                                <input type="search" id="buscador" class="form-control" placeholder="Buscar por nombre, tipo o sede" aria-label="Buscar servicios">
+                            </div>
+                        </div>
+
+                        <div class="admin-table-wrap">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Miniatura</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Sede</th>
+                                        <th scope="col">Duración</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-servicios">
+                                    <!-- Las filas las genera admin.js -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- /////////////////////// MODAL: CONFIRMAR ELIMINACIÓN -->
+    <div class="modal fade" id="modal-eliminar" tabindex="-1" aria-labelledby="modal-eliminar-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content admin-modal">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="modal-eliminar-title">Eliminar servicio</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Seguro que quieres eliminar <strong id="modal-eliminar-nombre"></strong>? Esta acción no se puede deshacer.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-gold btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger btn-sm" id="btn-confirmar-eliminar">
+                        <i class="bi bi-trash me-1"></i>Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de mensajes -->
+    <div class="admin-toast" id="admin-toast" role="status" aria-live="polite"></div>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../JS/admin.js"></script>
+</body>
+</html>
