@@ -1029,3 +1029,87 @@ textarea:focus {
         box-shadow: 0 0 0 6px var(--gold-glow), 0 20px 50px rgba(0, 0, 0, 0.5);
     }
 }
+
+.navbar {
+  padding: 0.5rem 0;
+}
+
+.navbar-brand {
+  padding: 0;
+  margin: 0;
+}
+
+
+/* Footer Personalizado */
+.custom-footer {
+  background-color: #0b0b0b;
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  color: #c0c0c0;
+}
+
+.footer-logo {
+  height: 50px;
+  width: auto;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #a0a0a0;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ffc107;
+}
+
+/* Iconos de Redes Sociales */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #ffc107;
+  color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+}
+
+
+
+/* ===== LOGO DEL NAVBAR ===== */
+.navbar-brand {
+    padding: 0;
+    margin: 0;
+}
+
+.nav-logo {
+    height: 70px;
+    width: auto;
+    display: block;
+}
+
+.custom-navbar {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+@media (max-width: 991px) {
+    .nav-logo {
+        height: 55px;
+    }
+}
