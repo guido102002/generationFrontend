@@ -389,39 +389,28 @@ a:hover {
 }
 
 .value-icon-box {
-    width: 90px;
-    height: 90px;
+    width: 58px;
+    height: 58px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(27, 26, 25, 0.7);
-    border: 1px solid var(--dark-grey);
-    border-radius: 16px;
-    padding: 18px;
-    transition: var(--transition);
-}
-
-.value-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    filter: brightness(0.9) sepia(0.3) saturate(1.2);
+    background: rgba(212, 169, 90, 0.1);
+    border: 1px solid rgba(212, 169, 90, 0.25);
+    border-radius: 14px;
+    font-size: 1.8rem;
+    color: var(--gold);
     transition: var(--transition);
 }
 
 .value-card:hover .value-icon-box {
     border-color: var(--gold);
-    background-color: rgba(212, 169, 90, 0.1);
+    background-color: rgba(212, 169, 90, 0.2);
     box-shadow: 0 0 20px var(--gold-glow);
     transform: scale(1.08);
 }
 
-.value-card:hover .value-img {
-    filter: brightness(1.1) drop-shadow(0 0 8px rgba(212, 169, 90, 0.6));
-}
-
 .value-title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 }
 
 /* ---------------- 6. EQUIPO DE DESARROLLADORES ---------------- */
