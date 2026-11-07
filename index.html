@@ -40,6 +40,9 @@
                         <a class="nav-link" href="./Pages/sobreNosotros.html">Sobre Nosotros</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="./Pages/servicios.html">Servicios</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="./Pages/contactanos.html">Contactanos</a>
                     </li>
                     <li class="nav-item">
@@ -158,7 +161,9 @@
                     <h2 class="inicio-heading">Servicios populares</h2>
                     <p class="inicio-subtext mt-3">Nuestros servicios más solicitados. Elige el tuyo y reserva en pocos clics.</p>
                 </div>
-                <div class="row g-4">
+                <!-- NUEVO: id para que inicio.js renderice los servicios guardados por el admin.
+                     Las cards de abajo son la base y se reemplazan si hay datos en localStorage. -->
+                <div class="row g-4" id="servicios-populares-grid">
                     <div class="col-sm-6 col-lg-3">
                         <article class="service-card">
                             <div class="service-media">

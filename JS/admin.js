@@ -15,6 +15,12 @@ const SERVICIOS_EJEMPLO = [
   { id: 2, nombre: "Afeitado premium", tipo: "Barba", sede: "Sede Chapinero", duracion: 30, precio: 25000, imagen: "../img/tradicion.png" },
   { id: 3, nombre: "Corte + barba", tipo: "Combo", sede: "Sede Usaquén", duracion: 60, precio: 50000, imagen: "../img/calidad.png" },
   { id: 4, nombre: "Tratamiento facial", tipo: "Tratamiento", sede: "Sede Country Club", duracion: 40, precio: 40000, imagen: "../img/puntualidad.png" },
+  { id: 5, nombre: "Perfilado de barba", tipo: "Barba", sede: "Sede Chapinero", duracion: 25, precio: 20000, imagen: "../img/barber.png" },
+  { id: 6, nombre: "Corte infantil", tipo: "Corte", sede: "Sede Usaquén", duracion: 30, precio: 25000, imagen: "../img/tradicion.png" },
+  { id: 7, nombre: "Corte degradado", tipo: "Corte", sede: "Sede Country Club", duracion: 50, precio: 40000, imagen: "../img/calidad.png" },
+  { id: 8, nombre: "Tinte de cabello", tipo: "Tratamiento", sede: "Sede Chapinero", duracion: 90, precio: 80000, imagen: "../img/puntualidad.png" },
+  { id: 9, nombre: "Combo premium", tipo: "Combo", sede: "Sede Country Club", duracion: 90, precio: 75000, imagen: "../img/barber.png" },
+  { id: 10, nombre: "Mascarilla negra", tipo: "Tratamiento", sede: "Sede Usaquén", duracion: 20, precio: 20000, imagen: "../img/tradicion.png" },
 ];
 
 /* ---------- Referencias al DOM ---------- */
