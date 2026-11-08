@@ -23,6 +23,15 @@
     <!-- 1. NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar inicio-navbar sticky-top">
         <div class="container">
+
+            <!-- Logo a la izquierda -->
+            <a class="navbar-brand d-flex align-items-center" href="./index.html">
+                <img src="img/logo-recortado-small.png"
+                     alt="Trips Barber Club Logo"
+                     class="nav-logo"
+                     style="height: 70px !important; width: auto !important; max-width: none;">
+            </a>
+
             <!-- Botón para desplegar el menú en móvil -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarStaticNav" aria-controls="navbarStaticNav"
@@ -340,13 +349,63 @@
         </section>
     </main>
 
-    <!-- 6. PIE DE PÁGINA CON SOPORTE DIRECTO -->
-        <footer class="custom-footer py-4">
-        <div class="container text-center">
-            <div class="footer-brand mb-2">
-                <span class="footer-title">Trips Barber Club</span>
+    <!-- 6. PIE DE PÁGINA -->
+    <footer class="custom-footer">
+        <div class="container">
+            <div class="row gy-4 footer-main">
+
+                <!-- Marca + redes -->
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <img src="img/logo-recortado-small.png" alt="Trips Barber Club" class="footer-logo mb-3">
+                    <p class="footer-text">
+                        Estilo y tradición en cada corte. Barbería clásica con atención personalizada.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="https://wa.me/573015047928" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Enlaces rápidos -->
+                <div class="col-lg-2 col-md-6 text-center text-md-start">
+                    <h5 class="footer-heading">Navegación</h5>
+                    <ul class="footer-links">
+                        <li><a href="./index.html">Inicio</a></li>
+                        <li><a href="./Pages/sobreNosotros.html">Sobre nosotros</a></li>
+                        <li><a href="./Pages/contactanos.html">Contáctanos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div class="col-lg-3 col-md-6 text-center text-md-start">
+                    <h5 class="footer-heading">Contacto</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-envelope-fill"></i> <a href="mailto:tripsbarber@gmail.com">tripsbarber@gmail.com</a></li>
+                        <li><i class="bi bi-telephone-fill"></i> <a href="tel:+573015047928">+57 3015047928</a></li>
+                        <li><i class="bi bi-geo-alt-fill"></i> <span>Calle 134 #9a-92 Local 1 Bogotá, Cundinamarca</span></li>
+                    </ul>
+                </div>
+
+                <!-- Horario -->
+                <div class="col-lg-3 col-md-6 text-center text-md-start">
+                    <h5 class="footer-heading">Horario</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-clock-fill"></i> <span>Lun - Sáb: 9:00 am - 8:00 pm</span></li>
+                        <li><i class="bi bi-clock-fill"></i> <span>Domingo: 10:00 am - 4:00 pm</span></li>
+                    </ul>
+                    <a href="https://wa.me/573015047928" target="_blank" rel="noopener" class="footer-btn">
+                        <i class="fa-brands fa-whatsapp"></i> Agenda tu cita
+                    </a>
+                </div>
+
             </div>
-            <p class="footer-copy mb-0">&copy; 2026 Trips Barber Club - Generation Colombia </p>
+
+            <!-- Franja final -->
+            <div class="footer-bottom text-center">
+                <p class="footer-copy mb-0">&copy; 2026 Trips Barber Club - Generation Colombia. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
 
