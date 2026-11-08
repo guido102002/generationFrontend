@@ -9,6 +9,7 @@ function toMinutes(hhmm) {
 function updateOpenStatus() {
   const badge = document.getElementById("open-badge");
   const rows = document.querySelectorAll("#hours li");
+  if (!badge || rows.length === 0) return;
   const now = new Date();
   const today = now.getDay();
   const current = now.getHours() * 60 + now.getMinutes();
@@ -38,28 +39,35 @@ const rules = {
 };
 
 function validateField(name) {
+  if (!form || !form.elements[name]) return true;
   const input = form.elements[name];
   const message = rules[name](input.value);
-  form.querySelector(`.error[data-for="${name}"]`).textContent = message;
+  const errorEl = form.querySelector(`.error[data-for="${name}"]`);
+  if (errorEl) errorEl.textContent = message;
   input.classList.toggle("invalid", Boolean(message));
   return !message;
 }
 
-Object.keys(rules).forEach((name) => {
-  const input = form.elements[name];
-  input.addEventListener("blur", () => validateField(name));
-  input.addEventListener("input", () => {
-    if (input.classList.contains("invalid")) validateField(name);
+if (form) {
+  Object.keys(rules).forEach((name) => {
+    const input = form.elements[name];
+    if (!input) return;
+    input.addEventListener("blur", () => validateField(name));
+    input.addEventListener("input", () => {
+      if (input.classList.contains("invalid")) validateField(name);
+    });
   });
-});
+}
 
 function setStatus(text, type) {
+  if (!statusEl) return;
   statusEl.textContent = text;
   statusEl.className = type ? `form-note ${type}` : "form-note";
 }
 
 /* ----------  Envío al correo ---------- */
-form.addEventListener("submit", async (e) => {
+if (form) {
+  form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const allValid = Object.keys(rules).map(validateField).every(Boolean);
@@ -113,6 +121,7 @@ form.addEventListener("submit", async (e) => {
     submitBtn.textContent = "Enviar mensaje";
   }
 });
+}
 
 updateOpenStatus();
 setInterval(updateOpenStatus, 60 * 1000);

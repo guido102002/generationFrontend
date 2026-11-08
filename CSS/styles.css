@@ -1030,67 +1030,6 @@ textarea:focus {
     }
 }
 
-.navbar {
-  padding: 0.5rem 0;
-}
-
-.navbar-brand {
-  padding: 0;
-  margin: 0;
-}
-
-
-/* Footer Personalizado */
-.custom-footer {
-  background-color: #0b0b0b;
-  border-top: 1px solid rgba(212, 175, 55, 0.25);
-  color: #c0c0c0;
-}
-
-.footer-logo {
-  height: 50px;
-  width: auto;
-}
-
-.footer-links li {
-  margin-bottom: 8px;
-}
-
-.footer-links a {
-  color: #a0a0a0;
-  font-size: 14px;
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: #ffc107;
-}
-
-/* Iconos de Redes Sociales */
-.social-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #1a1a1a;
-  color: #ffc107;
-  border: 1px solid rgba(255, 193, 7, 0.3);
-  font-size: 16px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-  background-color: #ffc107;
-  color: #000;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
-}
-
-
-
 /* ===== LOGO DEL NAVBAR ===== */
 .navbar-brand {
     padding: 0;
@@ -1111,5 +1050,159 @@ textarea:focus {
 @media (max-width: 991px) {
     .nav-logo {
         height: 55px;
+    }
+}
+
+/* ===== FOOTER ===== */
+.custom-footer {
+    background: #0a0908;
+    border-top: 1px solid rgba(212, 168, 83, 0.25);
+    padding-top: 3.5rem;
+    color: #b8b0a2;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.footer-main {
+    padding-bottom: 2.5rem;
+}
+
+.footer-logo {
+    height: 90px;
+    width: auto;
+}
+
+.footer-text {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    max-width: 320px;
+}
+
+.footer-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #d4a853;
+    margin-bottom: 1.2rem;
+    position: relative;
+    padding-bottom: 0.6rem;
+}
+
+.footer-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 36px;
+    height: 2px;
+    background: #d4a853;
+}
+
+/* Listas */
+.footer-links,
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li,
+.footer-contact li {
+    margin-bottom: 0.7rem;
+    font-size: 0.92rem;
+}
+
+.footer-links a,
+.footer-contact a {
+    color: #b8b0a2;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+    color: #d4a853;
+}
+
+.footer-contact i {
+    color: #d4a853;
+    margin-right: 0.5rem;
+}
+
+/* Redes sociales */
+.footer-social {
+    display: flex;
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+}
+
+.footer-social a {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(212, 168, 83, 0.5);
+    border-radius: 50%;
+    color: #d4a853;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.footer-social a:hover {
+    background: #d4a853;
+    color: #0a0908;
+    transform: translateY(-3px);
+}
+
+/* Botón de cita */
+.footer-btn {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.6rem 1.2rem;
+    background: #d4a853;
+    color: #0a0908;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.footer-btn:hover {
+    background: #e6bf72;
+    color: #0a0908;
+    transform: translateY(-2px);
+}
+
+/* Franja final */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.2rem 0;
+}
+
+.footer-copy {
+    font-size: 0.82rem;
+    color: #8a8377;
+}
+
+/* En móvil, centrar la línea decorativa de los títulos */
+@media (max-width: 767px) {
+    .footer-heading::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .footer-text {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
