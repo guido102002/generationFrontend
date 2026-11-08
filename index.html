@@ -49,7 +49,13 @@
                         <a class="nav-link" href="./Pages/sobreNosotros.html">Sobre Nosotros</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="./Pages/servicios.html">Servicios</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="./Pages/contactanos.html">Contactanos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Pages/Administrador.html">Administrador</a>
                     </li>
                 </ul>
             </div>
@@ -164,11 +170,13 @@
                     <h2 class="inicio-heading">Servicios populares</h2>
                     <p class="inicio-subtext mt-3">Nuestros servicios más solicitados. Elige el tuyo y reserva en pocos clics.</p>
                 </div>
-                <div class="row g-4">
+                <!-- NUEVO: id para que inicio.js renderice los servicios guardados por el admin.
+                     Las cards de abajo son la base y se reemplazan si hay datos en localStorage. -->
+                <div class="row g-4" id="servicios-populares-grid">
                     <div class="col-sm-6 col-lg-3">
                         <article class="service-card">
                             <div class="service-media">
-                                <img src="../img/barber.png" alt="Corte clásico">
+                                <img src="./img/barber.png" alt="Corte clásico">
                                 <span class="service-price">Desde $35.000</span>
                             </div>
                             <div class="service-body">
@@ -181,7 +189,7 @@
                     <div class="col-sm-6 col-lg-3">
                         <article class="service-card">
                             <div class="service-media">
-                                <img src="../img/tradicion.png" alt="Afeitado premium">
+                                <img src="./img/tradicion.png" alt="Afeitado premium">
                                 <span class="service-price">Desde $25.000</span>
                             </div>
                             <div class="service-body">
@@ -194,7 +202,7 @@
                     <div class="col-sm-6 col-lg-3">
                         <article class="service-card">
                             <div class="service-media">
-                                <img src="../img/calidad.png" alt="Corte y barba">
+                                <img src="./img/calidad.png" alt="Corte y barba">
                                 <span class="service-price">Desde $50.000</span>
                             </div>
                             <div class="service-body">
@@ -207,7 +215,7 @@
                     <div class="col-sm-6 col-lg-3">
                         <article class="service-card">
                             <div class="service-media">
-                                <img src="../img/puntualidad.png" alt="Tratamiento facial">
+                                <img src="./img/puntualidad.png" alt="Tratamiento facial">
                                 <span class="service-price">Desde $40.000</span>
                             </div>
                             <div class="service-body">
@@ -217,6 +225,13 @@
                             </div>
                         </article>
                     </div>
+                </div>
+
+                <!-- Botón hacia el catálogo completo -->
+                <div class="text-center mt-5">
+                    <a href="./Pages/servicios.html" class="btn btn-outline-gold px-4 py-2">
+                        <i class="bi bi-grid-3x3-gap me-2"></i>Ver catálogo completo de servicios
+                    </a>
                 </div>
             </div>
         </section>
@@ -420,7 +435,6 @@
 
     <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./JS/contacto.js"></script>
     <script src="./JS/inicio.js"></script>
 
 </body>
