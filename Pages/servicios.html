@@ -223,7 +223,97 @@
         </section>
     </main>
 
-    <!-- 3. FOOTER -->
+    <!-- 3. CARRITO / RESUMEN DE RESERVA (oculto hasta que se abre) -->
+    <div class="offcanvas offcanvas-end carrito-offcanvas" data-bs-theme="dark" tabindex="-1"
+         id="carritoOffcanvas" aria-labelledby="carritoOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h2 class="offcanvas-title" id="carritoOffcanvasLabel">
+                <i class="bi bi-bag-check me-2"></i>Tu reserva
+            </h2>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form id="carrito-form" novalidate>
+
+                <!-- Datos de la cita -->
+                <h3 class="carrito-subtitle">
+                    <i class="bi bi-calendar-check me-2"></i>Datos de la cita
+                </h3>
+
+                <div class="mb-3">
+                    <label for="carrito-fecha-input" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="carrito-fecha-input" name="fecha" required>
+                    <div class="invalid-feedback">Selecciona la fecha de tu cita.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="carrito-servicio-select" class="form-label">Servicio</label>
+                    <select class="form-select" id="carrito-servicio-select" name="servicio" required>
+                        <option value="" selected disabled>Selecciona un servicio</option>
+                    </select>
+                    <div class="invalid-feedback">Selecciona un servicio.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="carrito-sede-select" class="form-label">Sede</label>
+                    <select class="form-select" id="carrito-sede-select" name="sede" required>
+                        <option value="" selected disabled>Selecciona una sede</option>
+                        <option>Sede Country Club</option>
+                        <option>Sede Chapinero</option>
+                        <option>Sede Usaquén</option>
+                    </select>
+                    <div class="invalid-feedback">Selecciona una sede.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="carrito-barbero-select" class="form-label">Barbero</label>
+                    <select class="form-select" id="carrito-barbero-select" name="barbero">
+                        <option>Cualquiera</option>
+                        <option>Andrés</option>
+                        <option>Camilo</option>
+                        <option>Julián</option>
+                    </select>
+                </div>
+
+                <hr class="carrito-divider">
+
+                <!-- Datos personales -->
+                <h3 class="carrito-subtitle">
+                    <i class="bi bi-person me-2"></i>Tus datos
+                </h3>
+
+                <div class="mb-3">
+                    <label for="carrito-nombre" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="carrito-nombre" name="nombre"
+                           placeholder="Ej. Juan Pérez" autocomplete="name" required>
+                    <div class="invalid-feedback">Escribe tu nombre.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="carrito-correo" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="carrito-correo" name="correo"
+                           placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
+                    <div class="invalid-feedback">Escribe un correo válido.</div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="carrito-hora" class="form-label">Hora de la cita</label>
+                    <select class="form-select" id="carrito-hora" name="hora" required>
+                        <option value="" selected disabled>Selecciona una hora</option>
+                    </select>
+                    <div class="invalid-feedback">Selecciona una hora.</div>
+                </div>
+
+                <button type="submit" class="btn btn-gold w-100">
+                    <i class="bi bi-check2-circle me-2"></i>Confirmar reserva
+                </button>
+            </form>
+
+            <div id="carrito-exito" class="alert alert-success d-none mt-4" role="status"></div>
+        </div>
+    </div>
+
+    <!-- 4. FOOTER -->
     <footer class="custom-footer">
         <div class="container">
             <div class="row gy-4 footer-main">
@@ -293,8 +383,17 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- Botón flotante para abrir el carrito -->
+    <button type="button" class="carrito-flotante btn btn-gold" data-bs-toggle="offcanvas"
+            data-bs-target="#carritoOffcanvas" aria-controls="carritoOffcanvas"
+            aria-label="Abrir mi reserva">
+        <i class="bi bi-bag-check"></i>
+        <span class="carrito-badge d-none" id="carrito-badge">0</span>
+    </button>
+
     <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/catalogo.js"></script>
+    <script src="../JS/carrito.js"></script>
 </body>
 </html>
