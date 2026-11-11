@@ -15,20 +15,44 @@
         }[c]));
     }
 
+    function formatoPrecio(valor) {
+        return "$" + new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 }).format(Number(valor) || 0);
+    }
+
+    /* Normaliza el carrito y migra el formato antiguo ({ servicio }) a una lista */
+    function normalizarCarrito(carrito) {
+        const datos = carrito && typeof carrito === "object" ? { ...carrito } : {};
+
+        if (!Array.isArray(datos.servicios)) {
+            datos.servicios = datos.servicio ? [{ nombre: datos.servicio }] : [];
+        }
+
+        datos.servicios = datos.servicios
+            .map((s) => (typeof s === "string" ? { nombre: s } : s))
+            .filter((s) => s && s.nombre)
+            .map((s) => ({
+                nombre: s.nombre,
+                sede: s.sede || "",
+                precio: Number(s.precio) || 0,
+                duracion: Number(s.duracion) || 0,
+            }));
+
+        return datos;
+    }
+
     function leerCarrito() {
         try {
             const guardado = localStorage.getItem(CARRITO_KEY);
-            if (!guardado) return {};
-            const datos = JSON.parse(guardado);
-            return datos && typeof datos === "object" ? datos : {};
+            if (!guardado) return normalizarCarrito({});
+            return normalizarCarrito(JSON.parse(guardado));
         } catch (err) {
             console.error("No se pudo leer el carrito:", err);
-            return {};
+            return normalizarCarrito({});
         }
     }
 
     function guardarCarrito(cambios) {
-        const nuevo = { ...leerCarrito(), ...cambios };
+        const nuevo = normalizarCarrito({ ...leerCarrito(), ...cambios });
         try {
             localStorage.setItem(CARRITO_KEY, JSON.stringify(nuevo));
         } catch (err) {
@@ -47,6 +71,58 @@
             console.error("No se pudieron leer los servicios:", err);
             return [];
         }
+    }
+
+    /* Busca precio, duración y sede de un servicio en los datos o en el catálogo visible */
+    function datosServicio(nombre) {
+        if (!nombre) return { nombre: "", sede: "", precio: 0, duracion: 0 };
+
+        const servicio = leerServicios().find((s) => s && s.nombre === nombre);
+        if (servicio) {
+            return {
+                nombre: servicio.nombre,
+                sede: servicio.sede || "",
+                precio: Number(servicio.precio) || 0,
+                duracion: Number(servicio.duracion) || 0,
+            };
+        }
+
+        const card = Array.from(
+            document.querySelectorAll(
+                "#catalogo-grid .service-card, #servicios-populares-grid .service-card"
+            )
+        ).find(
+            (c) => c.querySelector(".service-name")?.textContent.trim() === nombre
+        );
+
+        if (!card) return { nombre, sede: "", precio: 0, duracion: 0 };
+
+        const meta = card.querySelector(".service-meta")?.textContent.trim() || "";
+        const partes = meta.split("·").map((p) => p.trim());
+        const precioTexto = card.querySelector(".service-price")?.textContent || "";
+
+        return {
+            nombre,
+            sede: partes[1] || "",
+            precio: Number(precioTexto.replace(/[^\d]/g, "")) || 0,
+            duracion: parseInt(partes[0], 10) || 0,
+        };
+    }
+
+    /* Agrega un servicio a la lista evitando duplicados */
+    function agregarServicio(carrito, nombre) {
+        if (!nombre) return { carrito, agregado: false };
+
+        if (carrito.servicios.some((s) => s.nombre === nombre)) {
+            return { carrito, agregado: false };
+        }
+
+        const datos = datosServicio(nombre);
+        carrito.servicios.push(datos);
+
+        if (!carrito.sede && datos.sede) carrito.sede = datos.sede;
+
+        return { carrito, agregado: true };
     }
 
     function formatearFecha(valor) {
@@ -93,7 +169,7 @@
         return horas;
     }
 
-    /*index.html: guardar la selección del widget*/
+    /* index.html: guardar la selección del widget */
     function initWidget() {
         const widget = document.querySelector(".inicio-search-widget");
         const servicio = document.getElementById("hero-servicio");
@@ -131,7 +207,17 @@
                 return;
             }
 
-            guardarSeleccion();
+            const carrito = leerCarrito();
+            agregarServicio(carrito, servicio.value);
+
+            guardarCarrito({
+                fecha: campos.fecha ? campos.fecha.value : "",
+                servicio: servicio.value,
+                sede: campos.sede ? campos.sede.value : "",
+                barbero: campos.barbero ? campos.barbero.value : "",
+                servicios: carrito.servicios,
+            });
+
             window.location.assign("./Pages/servicios.html?carrito=1");
         });
     }
@@ -147,12 +233,20 @@
             offcanvas: offcanvasEl,
             form: document.getElementById("carrito-form"),
             fecha: document.getElementById("carrito-fecha-input"),
-            servicio: document.getElementById("carrito-servicio-select"),
             sede: document.getElementById("carrito-sede-select"),
             barbero: document.getElementById("carrito-barbero-select"),
+            servicio: document.getElementById("carrito-servicio-select"),
+            agregar: document.getElementById("carrito-agregar-servicio"),
+            lista: document.getElementById("carrito-servicios-lista"),
+            sinServicios: document.getElementById("carrito-sin-servicios"),
+            aviso: document.getElementById("carrito-servicios-aviso"),
+            serviciosError: document.getElementById("carrito-servicios-error"),
+            total: document.getElementById("carrito-total"),
+            totalValor: document.getElementById("carrito-total-valor"),
             nombre: document.getElementById("carrito-nombre"),
             correo: document.getElementById("carrito-correo"),
             hora: document.getElementById("carrito-hora"),
+            observacion: document.getElementById("carrito-observacion"),
             exito: document.getElementById("carrito-exito"),
             badge: document.getElementById("carrito-badge"),
         };
@@ -164,9 +258,19 @@
         ["fecha", "servicio", "sede", "barbero"].forEach((clave) => {
             if (params.get(clave)) desdeURL[clave] = params.get(clave);
         });
-        if (Object.keys(desdeURL).length > 0) guardarCarrito(desdeURL);
+        if (Object.keys(desdeURL).length > 0) {
+            const carrito = leerCarrito();
+            if (desdeURL.servicio) agregarServicio(carrito, desdeURL.servicio);
+            guardarCarrito({
+                ...desdeURL,
+                servicios: carrito.servicios,
+                sede: desdeURL.sede || carrito.sede,
+            });
+        }
 
         const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+
+        let avisoTimer = null;
 
         function nombresServicios() {
             const servicios = leerServicios();
@@ -186,7 +290,7 @@
             return [...new Set(delCatalogo)];
         }
 
-        function poblarServicios(seleccionado) {
+        function poblarServicios() {
             if (!els.servicio) return;
 
             const nombres = nombresServicios();
@@ -201,23 +305,13 @@
             });
 
             els.servicio.innerHTML = opciones.join("");
-
-            if (!seleccionado) return;
-
-            if (!nombres.includes(seleccionado)) {
-                els.servicio.insertAdjacentHTML(
-                    "beforeend",
-                    `<option value="${escapeHTML(seleccionado)}">${escapeHTML(seleccionado)}</option>`
-                );
-            }
-            els.servicio.value = seleccionado;
         }
 
         function actualizarBadge(carrito = leerCarrito()) {
             if (!els.badge) return;
-            const tiene = Boolean(carrito.servicio);
-            els.badge.textContent = tiene ? "1" : "0";
-            els.badge.classList.toggle("d-none", !tiene);
+            const cantidad = (carrito.servicios || []).length;
+            els.badge.textContent = String(cantidad);
+            els.badge.classList.toggle("d-none", cantidad === 0);
         }
 
         function renderHoras(fecha, seleccionada) {
@@ -233,18 +327,151 @@
             }
         }
 
+        /* Completa precio/duración que falten en servicios guardados con el formato antiguo */
+        function serviciosEnriquecidos(carrito) {
+            return (carrito.servicios || []).map((s) => {
+                const datos = datosServicio(s.nombre);
+                return {
+                    nombre: s.nombre,
+                    sede: s.sede || datos.sede,
+                    precio: Number(s.precio) || datos.precio || 0,
+                    duracion: Number(s.duracion) || datos.duracion || 0,
+                };
+            });
+        }
+
+        function renderTotal(servicios) {
+            if (!els.total || !els.totalValor) return;
+
+            const total = servicios.reduce((suma, s) => suma + (Number(s.precio) || 0), 0);
+
+            if (total > 0) {
+                els.total.classList.remove("d-none");
+                els.totalValor.textContent = formatoPrecio(total);
+            } else {
+                els.total.classList.add("d-none");
+            }
+        }
+
+        function renderServicios(carrito) {
+            if (!els.lista) return;
+
+            const servicios = serviciosEnriquecidos(carrito);
+
+            els.lista.innerHTML = servicios
+                .map((s, index) => {
+                    const meta = [];
+                    if (s.duracion) meta.push(`${s.duracion} min`);
+                    if (s.precio) meta.push(formatoPrecio(s.precio));
+
+                    return `
+                        <li class="list-group-item carrito-servicio-item">
+                            <div class="carrito-servicio-info">
+                                <span class="carrito-servicio-nombre">${escapeHTML(s.nombre)}</span>
+                                ${
+                                    meta.length
+                                        ? `<small class="carrito-servicio-meta">${escapeHTML(
+                                              meta.join(" · ")
+                                          )}</small>`
+                                        : ""
+                                }
+                            </div>
+                            <button type="button" class="carrito-quitar" data-index="${index}"
+                                    aria-label="Quitar ${escapeHTML(s.nombre)}">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </li>`;
+                })
+                .join("");
+
+            if (els.sinServicios) {
+                els.sinServicios.classList.toggle("d-none", servicios.length > 0);
+            }
+            if (els.serviciosError) els.serviciosError.classList.add("d-none");
+
+            renderTotal(servicios);
+        }
+
+        function mostrarAviso(mensaje, tipo = "success") {
+            if (!els.aviso) return;
+
+            els.aviso.textContent = mensaje;
+            els.aviso.classList.remove("d-none", "text-success", "text-warning");
+            els.aviso.classList.add(tipo === "warning" ? "text-warning" : "text-success");
+
+            if (avisoTimer) clearTimeout(avisoTimer);
+            avisoTimer = window.setTimeout(() => {
+                els.aviso.classList.add("d-none");
+            }, 2500);
+        }
+
+        function ocultarExito() {
+            if (els.exito) els.exito.classList.add("d-none");
+        }
+
+        function agregarServicioDesdeUI() {
+            const nombre = els.servicio ? els.servicio.value : "";
+
+            if (!nombre) {
+                mostrarAviso("Selecciona un servicio primero.", "warning");
+                if (els.servicio) els.servicio.focus();
+                return;
+            }
+
+            ocultarExito();
+
+            const carrito = leerCarrito();
+            const resultado = agregarServicio(carrito, nombre);
+
+            if (!resultado.agregado) {
+                mostrarAviso("Ese servicio ya está en tu reserva.", "warning");
+                return;
+            }
+
+            const actualizado = guardarCarrito({
+                servicios: resultado.carrito.servicios,
+                sede: resultado.carrito.sede,
+            });
+
+            if (els.sede) els.sede.value = actualizado.sede || "";
+            if (els.servicio) els.servicio.value = "";
+
+            renderServicios(actualizado);
+            actualizarBadge(actualizado);
+            mostrarAviso("Servicio agregado.", "success");
+        }
+
+        function quitarServicio(index) {
+            const carrito = leerCarrito();
+
+            if (!Number.isInteger(index) || index < 0 || index >= carrito.servicios.length) {
+                return;
+            }
+
+            ocultarExito();
+            carrito.servicios.splice(index, 1);
+
+            const actualizado = guardarCarrito({ servicios: carrito.servicios });
+            renderServicios(actualizado);
+            actualizarBadge(actualizado);
+            if (els.serviciosError) els.serviciosError.classList.add("d-none");
+        }
+
         function renderFormulario() {
             const carrito = leerCarrito();
 
-            poblarServicios(carrito.servicio || "");
+            poblarServicios();
 
             if (els.fecha) els.fecha.value = carrito.fecha || "";
             if (els.sede) els.sede.value = carrito.sede || "";
             if (els.barbero) els.barbero.value = carrito.barbero || "Cualquiera";
             if (els.nombre) els.nombre.value = carrito.nombre || "";
             if (els.correo) els.correo.value = carrito.correo || "";
+            if (els.observacion) els.observacion.value = carrito.observacion || "";
+            if (els.aviso) els.aviso.classList.add("d-none");
 
             renderHoras(carrito.fecha, carrito.hora || "");
+            renderServicios(carrito);
             actualizarBadge(carrito);
 
             if (els.form) els.form.classList.remove("was-validated");
@@ -259,12 +486,14 @@
         /* Guardar los campos mientras el usuario los edita */
         function guardarCampo(clave, el) {
             if (!el) return;
+            ocultarExito();
             guardarCarrito({ [clave]: el.value });
             actualizarBadge();
         }
 
         if (els.fecha) {
             els.fecha.addEventListener("change", () => {
+                ocultarExito();
                 const fecha = els.fecha.value;
                 const carrito = leerCarrito();
                 const horas = generarHoras(fecha);
@@ -276,38 +505,15 @@
             });
         }
 
-        if (els.servicio) {
-            els.servicio.addEventListener("change", () => {
-                guardarCarrito({ servicio: els.servicio.value });
+        if (els.agregar) {
+            els.agregar.addEventListener("click", agregarServicioDesdeUI);
+        }
 
-                /* Si la sede está vacía, se autocompleta con la sede del servicio */
-                if (els.sede && !els.sede.value) {
-                    const servicio = leerServicios().find(
-                        (s) => s && s.nombre === els.servicio.value
-                    );
-
-                    let sede = servicio && servicio.sede ? servicio.sede : "";
-
-                    if (!sede) {
-                        const card = Array.from(
-                            document.querySelectorAll("#catalogo-grid .service-card")
-                        ).find(
-                            (c) =>
-                                c.querySelector(".service-name")?.textContent.trim() ===
-                                els.servicio.value
-                        );
-                        const meta =
-                            card?.querySelector(".service-meta")?.textContent.trim() || "";
-                        sede = meta.split("·")[1]?.trim() || "";
-                    }
-
-                    if (sede) {
-                        els.sede.value = sede;
-                        guardarCarrito({ sede });
-                    }
-                }
-
-                actualizarBadge();
+        if (els.lista) {
+            els.lista.addEventListener("click", (event) => {
+                const boton = event.target.closest(".carrito-quitar");
+                if (!boton) return;
+                quitarServicio(Number(boton.dataset.index));
             });
         }
 
@@ -326,8 +532,13 @@
         if (els.hora) {
             els.hora.addEventListener("change", () => guardarCampo("hora", els.hora));
         }
+        if (els.observacion) {
+            els.observacion.addEventListener("input", () =>
+                guardarCampo("observacion", els.observacion)
+            );
+        }
 
-        /* Botones "Reservar" del catálogo: siempre abren el carrito */
+        /* Botones "Reservar" del catálogo: agregan el servicio y abren el carrito */
         document.addEventListener("click", (event) => {
             const boton = event.target.closest("#catalogo-grid .service-card .btn");
             if (!boton) return;
@@ -338,10 +549,18 @@
             event.preventDefault();
 
             const nombre = card.querySelector(".service-name")?.textContent.trim() || "";
-            const meta = card.querySelector(".service-meta")?.textContent.trim() || "";
-            const sede = meta.split("·")[1]?.trim() || "";
+            if (!nombre) return;
 
-            guardarCarrito({ servicio: nombre, sede });
+            const carrito = leerCarrito();
+            const resultado = agregarServicio(carrito, nombre);
+
+            if (resultado.agregado) {
+                guardarCarrito({
+                    servicios: resultado.carrito.servicios,
+                    sede: resultado.carrito.sede,
+                });
+            }
+
             abrir();
         });
 
@@ -350,6 +569,15 @@
             els.form.addEventListener("submit", (event) => {
                 event.preventDefault();
                 event.stopPropagation();
+
+                const carrito = leerCarrito();
+
+                if (carrito.servicios.length === 0) {
+                    els.form.classList.add("was-validated");
+                    if (els.serviciosError) els.serviciosError.classList.remove("d-none");
+                    if (els.servicio) els.servicio.focus();
+                    return;
+                }
 
                 if (!els.form.checkValidity()) {
                     els.form.classList.add("was-validated");
@@ -360,12 +588,14 @@
 
                 const datos = {
                     fecha: els.fecha ? els.fecha.value : "",
-                    servicio: els.servicio ? els.servicio.value : "",
                     sede: els.sede ? els.sede.value : "",
                     barbero: els.barbero ? els.barbero.value : "",
                     nombre: els.nombre ? els.nombre.value.trim() : "",
                     correo: els.correo ? els.correo.value.trim() : "",
                     hora: els.hora ? els.hora.value : "",
+                    observacion: els.observacion ? els.observacion.value.trim() : "",
+                    servicios: carrito.servicios,
+                    servicio: carrito.servicios[0]?.nombre || "",
                 };
                 guardarCarrito(datos);
                 actualizarBadge();
@@ -375,23 +605,35 @@
                         ? els.hora.options[els.hora.selectedIndex].textContent
                         : datos.hora;
 
+                const nombresTexto = carrito.servicios.map((s) => s.nombre).join(", ");
+
                 const texto = [
                     "Hola, quiero confirmar mi reserva:",
-                    `Servicio: ${datos.servicio || "—"}`,
+                    `Servicios: ${nombresTexto || "—"}`,
                     `Sede: ${datos.sede || "—"}`,
                     `Fecha: ${formatearFecha(datos.fecha)}`,
                     `Hora: ${horaTexto}`,
                     `Barbero: ${datos.barbero || "Cualquiera"}`,
                     `Nombre: ${datos.nombre}`,
                     `Correo: ${datos.correo}`,
+                    `Observaciones: ${datos.observacion || "Ninguna"}`,
                 ].join("\n");
 
                 if (els.exito) {
                     els.exito.classList.remove("d-none");
                     els.exito.innerHTML = `
                         <strong>¡Reserva registrada!</strong><br>
-                        ${escapeHTML(datos.servicio || "Servicio")} · ${escapeHTML(formatearFecha(datos.fecha))} · ${escapeHTML(horaTexto)}<br>
+                        ${escapeHTML(nombresTexto || "Servicio")} · ${escapeHTML(
+                        formatearFecha(datos.fecha)
+                    )} · ${escapeHTML(horaTexto)}<br>
                         Te contactaremos a <strong>${escapeHTML(datos.correo)}</strong>.
+                        ${
+                            datos.observacion
+                                ? `<br><small>Observaciones: ${escapeHTML(
+                                      datos.observacion
+                                  )}</small>`
+                                : ""
+                        }
                         <a class="btn btn-gold btn-sm w-100 mt-3" target="_blank" rel="noopener"
                            href="https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}">
                             <i class="bi bi-whatsapp me-2"></i>Enviar por WhatsApp
@@ -411,7 +653,9 @@
             /* Limpia la URL para que no se reabra al recargar */
             const url = new URL(window.location.href);
             url.searchParams.delete("carrito");
-            ["fecha", "servicio", "sede", "barbero"].forEach((k) => url.searchParams.delete(k));
+            ["fecha", "servicio", "sede", "barbero"].forEach((k) =>
+                url.searchParams.delete(k)
+            );
             if (url.hash === "#carrito") url.hash = "";
             window.history.replaceState(null, "", url.pathname + url.search + url.hash);
         } else {

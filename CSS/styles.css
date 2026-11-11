@@ -1213,9 +1213,7 @@ textarea:focus {
     }
 }
 
-/* ============================================================
-   CARRITO / RESUMEN DE RESERVA (PÁGINA DE SERVICIOS)
-   ============================================================ */
+/* CARRITO / RESUMEN DE RESERVA (PÁGINA DE SERVICIOS) */
 .carrito-offcanvas {
     width: min(430px, 100%);
     background: var(--bg-black);
@@ -1303,6 +1301,119 @@ textarea:focus {
     background: rgba(25, 135, 84, 0.12);
     border: 1px solid rgba(25, 135, 84, 0.5);
     color: #9fe0b8;
+}
+
+/* Agregar servicios */
+.carrito-offcanvas .input-group > .form-select {
+    border-radius: 8px 0 0 8px;
+    border: 1px solid var(--gold);
+
+    
+}
+
+.carrito-agregar {
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border-radius: 0 8px 8px 0;
+    padding: 0.45rem 0.9rem;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.carrito-agregar:hover,
+.carrito-agregar:focus {
+    background: var(--gold);
+    color: #121212;
+}
+
+/* Lista de servicios agregados */
+.carrito-servicios {
+    max-height: 220px;
+    overflow-y: auto;
+    border-radius: 10px;
+    
+}
+
+.carrito-servicios .list-group-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    background: var(--card-surface);
+    border: 1px solid var(--dark-grey);
+    color: var(--grey-light);
+}
+
+.carrito-servicios .list-group-item + .list-group-item {
+    border-top: 0;
+}
+
+.carrito-servicio-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.35;
+    min-width: 0;
+}
+
+.carrito-servicio-nombre {
+    color: var(--grey-light);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.carrito-servicio-meta {
+    color: var(--gold);
+    font-size: 0.72rem;
+}
+
+.carrito-quitar {
+    flex: 0 0 auto;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--dark-grey);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--grey-light);
+    font-size: 0.75rem;
+    transition: var(--transition);
+}
+
+.carrito-quitar:hover,
+.carrito-quitar:focus {
+    background: #b02a37;
+    border-color: #b02a37;
+    color: #fff;
+}
+
+.carrito-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--dark-grey);
+    font-size: 0.9rem;
+    color: var(--grey-light);
+}
+
+.carrito-total strong {
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+}
+
+.carrito-error {
+    color: #e08a8a;
 }
 
 /* Botón flotante del carrito (abajo a la izquierda) */
