@@ -564,6 +564,34 @@
             abrir();
         });
 
+        /* Si no hay sesión, cierra el carrito, abre el login y al iniciar sesión
+           reabre el carrito y confirma la reserva automáticamente */
+        function pedirInicioSesion() {
+            const mostrarLogin = () => {
+                window.TBCAuth.abrirLogin({
+                    mensaje: "Inicia sesión o regístrate para confirmar tu reserva.",
+                    alAutenticar: () => {
+                        offcanvasEl.addEventListener(
+                            "shown.bs.offcanvas",
+                            () => {
+                                if (els.form) {
+                                    els.form.dispatchEvent(
+                                        new Event("submit", { bubbles: true, cancelable: true })
+                                    );
+                                }
+                            },
+                            { once: true }
+                        );
+                        abrir();
+                    },
+                    alCancelar: abrir,
+                });
+            };
+
+            offcanvasEl.addEventListener("hidden.bs.offcanvas", mostrarLogin, { once: true });
+            offcanvas.hide();
+        }
+
         /* Confirmar reserva */
         if (els.form) {
             els.form.addEventListener("submit", (event) => {
@@ -583,6 +611,12 @@
                     els.form.classList.add("was-validated");
                     const invalido = els.form.querySelector(":invalid");
                     if (invalido) invalido.focus();
+                    return;
+                }
+
+                /* Para confirmar la reserva se necesita una sesión iniciada */
+                if (window.TBCAuth && !window.TBCAuth.haySesion()) {
+                    pedirInicioSesion();
                     return;
                 }
 
