@@ -1215,7 +1215,7 @@ textarea:focus {
 
 /* CARRITO / RESUMEN DE RESERVA (PÁGINA DE SERVICIOS) */
 .carrito-offcanvas {
-    width: min(430px, 100%);
+    --bs-offcanvas-width: 420px;
     background: var(--bg-black);
     color: var(--grey-light);
     border-left: 1px solid var(--dark-grey);
