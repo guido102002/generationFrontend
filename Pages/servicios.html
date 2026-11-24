@@ -266,6 +266,20 @@
                         <option>Julián</option>
                     </select>
                 </div>
+                <div class="mb-3">
+                    <label for="carrito-hora" class="form-label">Hora de la cita</label>
+                    <select class="form-select" id="carrito-hora" name="hora" required>
+                        <option value="" selected disabled>Selecciona una hora</option>
+                    </select>
+                    <div class="invalid-feedback">Selecciona una hora.</div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="carrito-observacion" class="form-label">Observaciones (opcional)</label>
+                    <textarea class="form-control" id="carrito-observacion" name="observacion" rows="3"
+                              maxlength="300"
+                              placeholder="Ej. alergias, preferencias o indicaciones especiales..."></textarea>
+                </div>
 
                 <hr class="carrito-divider">
 
@@ -298,40 +312,7 @@
 
                 <hr class="carrito-divider">
 
-                <!-- Datos personales -->
-                <h3 class="carrito-subtitle">
-                    <i class="bi bi-person me-2"></i>Tus datos
-                </h3>
-
-                <div class="mb-3">
-                    <label for="carrito-nombre" class="form-label">Nombre completo</label>
-                    <input type="text" class="form-control" id="carrito-nombre" name="nombre"
-                           placeholder="Ej. Juan Pérez" autocomplete="name" required>
-                    <div class="invalid-feedback">Escribe tu nombre.</div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="carrito-correo" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="carrito-correo" name="correo"
-                           placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
-                    <div class="invalid-feedback">Escribe un correo válido.</div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="carrito-hora" class="form-label">Hora de la cita</label>
-                    <select class="form-select" id="carrito-hora" name="hora" required>
-                        <option value="" selected disabled>Selecciona una hora</option>
-                    </select>
-                    <div class="invalid-feedback">Selecciona una hora.</div>
-                </div>
-
-                <div class="mb-4">
-                    <label for="carrito-observacion" class="form-label">Observaciones (opcional)</label>
-                    <textarea class="form-control" id="carrito-observacion" name="observacion" rows="3"
-                              maxlength="300"
-                              placeholder="Ej. alergias, preferencias o indicaciones especiales..."></textarea>
-                </div>
-
+                <!-- Boton Confirmar Reserva -->
                 <button type="submit" class="btn btn-gold w-100">
                     <i class="bi bi-check2-circle me-2"></i>Confirmar reserva
                 </button>
